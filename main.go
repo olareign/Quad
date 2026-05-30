@@ -1,69 +1,60 @@
-// START
-//   ↓
-// Are x and y both positive?
-//   NO  → print nothing, stop
-//   YES → continue
-//   ↓
-// Print TOP line  ( ABBBC )
-//   ↓
-// Is y greater than 1?
-//   NO  → stop (only 1 row)
-//   YES → continue
-//   ↓
-// Print (y - 2) MIDDLE rows  ( B   B )
-//   ↓
-// Print BOTTOM line  ( CBBBA )  ← mirrored top
-// DONE
-
 package main
 
 import "fmt"
 
 func main() {
-	QuadE(5,3)
+	QuadA(10,6)
 }
 
-func QuadE(x, y int) {
-    // Step 1: guard
+// START
+//   ↓
+// Are x and y both positive?
+//   NO → print nothing, stop
+//   YES → continue
+//   ↓
+// Print TOP line
+//   ↓
+// Is y greater than 1?
+//   NO → stop here (only 1 row needed)
+//   YES → continue
+//   ↓
+// Print (y - 2) MIDDLE rows
+//   ↓
+// Print BOTTOM line (same as top)
+// DONE
+
+func QuadA(x, y int) {
+    // Step 1: guard — do nothing if invalid
     if x <= 0 || y <= 0 {
         return
     }
 
-    // Step 2: build top line  ABBBC
-    topLine := 'A'
+    // Step 2: build the top/bottom line as a string
+    topLine := "o"
     if x > 1 {
         for i := 0; i < x-2; i++ {
-            topLine += 'B'
+            topLine += "-"
         }
-        topLine += 'C'
+        topLine += "o"
     }
 
-    // Step 3: build middle row  B   B
-    middleRow := 'B'
+    // Step 3: build the middle row as a string
+    middleRow := "|"
     if x > 1 {
         for i := 0; i < x-2; i++ {
-            middleRow += ' '
+            middleRow += " "
         }
-        middleRow += 'B'
+        middleRow += "|"
     }
 
-    // Step 4: build bottom line  CBBBA  (mirror of top)
-    bottomLine := 'C'
-    if x > 1 {
-        for i := 0; i < x-2; i++ {
-            bottomLine += 'B'
-        }
-        bottomLine += 'A'
-    }
+    // Step 4: print top line
+    fmt.Println(topLine)
 
-    // Step 5: print top
-    z01.PrintRune(topLine)
-
-    // Step 6: if height > 1, print middles then bottom
+    // Step 5: if height > 1, print middles then bottom
     if y > 1 {
         for i := 0; i < y-2; i++ {
-            z01.PrintRune(middleRow)
+            fmt.Println(middleRow)
         }
-        z01.PrintRune(bottomLine)
+        fmt.Println(topLine) // bottom = same as top
     }
 }
